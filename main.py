@@ -9,13 +9,21 @@ def main():
 
     _ = pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
+    clock = pygame.time.Clock()
+    dt = 0.0        # Delta time
     while True:
-        log_state()
+        log_state() # Log for bootdev check
+
+        # Placeholder for game events handling.
         for event in pygame.event.get():
             pass
-        _ = screen.fill((0, 0, 0))
-        pygame.display.flip()
+        _ = screen.fill((0, 0, 0))  # fill screen with pure black
+        pygame.display.flip()       # refresh screen
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return
+
+        dt = clock.tick(60) / 1000
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,7 @@
 import pygame
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH
 from logger import log_state
+from player import Player
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -14,10 +15,9 @@ def main():
     while True:
         log_state() # Log for bootdev check
 
-        # Placeholder for game events handling.
-        for event in pygame.event.get():
-            pass
         _ = screen.fill((0, 0, 0))  # fill screen with pure black
+        player = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
+        player.draw(screen=screen)
         pygame.display.flip()       # refresh screen
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

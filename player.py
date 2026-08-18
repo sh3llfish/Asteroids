@@ -1,6 +1,7 @@
+from locale import D_T_FMT
 from typing import override
 import pygame
-from constants import PLAYER_RADIUS, LINE_WIDTH
+from constants import PLAYER_RADIUS, LINE_WIDTH, PLAYER_TURN_SPEED
 from circleshape import CircleShape
 
 
@@ -21,3 +22,16 @@ class Player(CircleShape):
     def draw(self, screen: pygame.Surface) -> None:
         pygame.draw.polygon(surface=screen, color="white", points=self.triangle(), width=LINE_WIDTH)
         return None
+
+    def rotate(self, dt: float):
+        self.rotation += PLAYER_TURN_SPEED * dt
+
+    def update(self, dt: float) -> None:
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_a]:
+            self.rotate(-1 * dt)
+        if keys[pygame.K_d]:
+            self.rotate(dt)
+
+        print(self.rotation)
